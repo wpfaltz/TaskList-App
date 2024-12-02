@@ -1022,6 +1022,75 @@ class _UserTaskListState extends State<UserTaskList> {
   }
 }
 
+class ManageTaskListsPage extends StatelessWidget {
+  final String nome;
+  final String token;
+  final String email;
+
+  ManageTaskListsPage({
+    required this.nome,
+    required this.token,
+    required this.email,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Gerenciar Listas de Tarefas'),
+      ),
+      body: Center(
+        child: Text(
+          'Aqui você poderá gerenciar todas as listas de tarefas.',
+          style: TextStyle(fontSize: 18),
+          textAlign: TextAlign.center,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Logic to add a new task list goes here
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class ManageChatsPage extends StatelessWidget {
+  final String nome;
+  final String token;
+  final String email;
+
+  ManageChatsPage({
+    required this.nome,
+    required this.token,
+    required this.email,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Gerenciar Chats'),
+      ),
+      body: Center(
+        child: Text(
+          'Aqui você poderá gerenciar todas as conversas e chats.',
+          style: TextStyle(fontSize: 18),
+          textAlign: TextAlign.center,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Logic to start a new chat goes here
+        },
+        child: Icon(Icons.add_comment),
+      ),
+    );
+  }
+}
+
+
 Drawer buildDrawer(
     BuildContext context, String nome, String token, String email) {
   return Drawer(
@@ -1052,6 +1121,19 @@ Drawer buildDrawer(
           },
         ),
         ListTile(
+          leading: Icon(Icons.list),
+          title: Text('Gerenciar Listas de Tarefas'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ManageTaskListsPage(
+                      nome: nome, token: token, email: email)),
+            );
+          },
+        ),
+        ListTile(
           leading: Icon(Icons.chat),
           title: Text('Chat'),
           onTap: () {
@@ -1061,6 +1143,19 @@ Drawer buildDrawer(
               MaterialPageRoute(
                   builder: (context) =>
                       ChatPage(nome: nome, token: token, email: email)),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.manage_accounts),
+          title: Text('Gerenciar Chats'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ManageChatsPage(nome: nome, token: token, email: email)),
             );
           },
         ),
